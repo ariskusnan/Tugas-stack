@@ -1,0 +1,103 @@
+#include <iostream>
+#include <windows.h>
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+
+
+struct pemain {
+ int no_id;
+ char nama[50];
+   char posisi[50];
+   pemain *next;
+   pemain *prev;
+} *awal=NULL, *akhir, *baru, *bantu, *setelah, *sebelum, *hapus;
+
+void push();
+void pop();
+void view();
+bool check(int checker);
+
+
+main(){
+ int pilih;
+   menu :
+   cout<<"...: Pemain Bola :...\n";
+   cout<<"1. push\n";
+   cout<<"2. pop\n";
+   cout<<"3. Cetak\n";
+   cout<<"4. Keluar Program.\n";
+   cout<<"Pilihan : ";
+   cin>>pilih;
+ switch(pilih){
+    case 1 : push();
+         cout<<"--: Data pertama berhasil ditambahkan :--\n";
+         system("pause");
+               system("cls");
+               goto menu;
+    case 2 : pop();
+               system("cls");
+               goto menu;
+      case 3 : view();
+               system("cls");
+               goto menu;
+      case 4 : return 0;
+      default : system("cls");
+          goto menu;
+   }
+}
+
+void push(){
+   baru = new pemain;
+   cout<<"Masukkan No Punggung.  : ";
+   cin>>baru->no_id;
+   cout<<"Masukkan Nama  : ";
+   gets(baru->nama);
+   cout<<"Masukkan Posisi : ";
+   gets(baru->posisi);
+
+   baru->next = NULL;
+   baru->prev = NULL;
+   if(awal == NULL){
+    awal = akhir = baru;
+   }
+}
+
+void pop(){
+ if(awal==NULL){
+    cout << "KOSONG!!";
+   }
+   else if(awal->next==NULL){
+    hapus=awal;
+      awal=NULL;
+      akhir=NULL;
+      delete hapus;
+   }
+   else {
+    hapus=awal;
+      awal=hapus->next;
+      awal->prev=NULL;
+      delete hapus;
+   }
+   cout << endl;
+   cout << "TERHAPUS!!\n";
+   }
+
+
+void view(){
+ if ((awal == NULL) || (akhir == NULL)){
+    cout<<"Data Kosong\n";
+      system("pause");}
+   else{
+	bantu = awal;
+   while (bantu != NULL){
+   cout<<"No.        : "<<bantu->no_id<<"\n";
+   cout<<"Nama       : "<<bantu->nama<<"\n";
+   cout<<"Posisi     : "<<bantu->posisi<<"\n";
+   cout<<"==============================================\n";
+   bantu = bantu->next;
+   cout<<endl;
+   }
+   system("pause");
+   }
+}
